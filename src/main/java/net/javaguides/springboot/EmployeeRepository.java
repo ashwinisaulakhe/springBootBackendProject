@@ -16,4 +16,14 @@ public class EmployeeRepository {
 		return null;
 	}
 
+	public Object findById(long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public void deleteById(long id) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

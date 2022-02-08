@@ -18,8 +18,8 @@ public class Employee {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	long id;
 	
-	private	@Column(name="first_name",nullable=false) 
-	private String startName;
+	@Column(name="first_name",nullable=false) 
+	private String firstName;
 	
 	@Column(name="last_name",nullable=false)
 	private String lastName;

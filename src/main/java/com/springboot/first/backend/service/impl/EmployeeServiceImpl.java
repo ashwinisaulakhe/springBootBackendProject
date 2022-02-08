@@ -22,17 +22,35 @@ public class EmployeeServiceImpl implements EmployeeService
 		return employeeRepository.save(employee);
 	}
 
-		@Override
-		public List<Employee> getAllEmployees() {
+	@Override
+	public List<Employee> getAllEmployees() {
 		// TODO Auto-generated method stub
 		return employeeRepository.findAll();
-
-		}
-
-	public Employee getEmployeeById(long, id) {
-	
-	//	 TODO Auto-generated method stub
-		return employeeRepository.findById(id).orElseThrow(()->
-		new ResourceNotFoundException("Employee","Id",id));
 	}
-
+	public Employee getEmployeeById(long id) {
+    	
+    	return (employeeRepository.findById(id)).orElseThrow(()->
+    				new ResourceNotFoundException("Employee","Id",id));
+    }
+	public Employee updateEmployee(Employee employee,long id) {
+		//we need to check whether employee with given id is existing database or not
+		Employee existingEmployee = (employeeRepository.findById(id)).orElseThrow(()->
+				new ResourceNotFoundException("Employee","Id",id));
+		
+		existingEmployee.setFirstName(employee.getFirstName());
+		existingEmployee.setLastName(employee.getLastName());
+		existingEmployee.setEmail(employee.getEmail());
+		
+		//save existing employee to database
+		Employee employeeRespository= employeeRepository.save(existingEmployee);
+		
+		return null;
+	}
+	public void deleteEmployee(long id)
+	{
+		//check whether employee id is in DB existing or not
+		employeeRepository.findById(id).orElseThrow(()->
+		new ResourceNotFoundException("Employee","Id",id));
+		employeeRepository.deleteById(id);
+	}
+}
